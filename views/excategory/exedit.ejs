@@ -1,0 +1,66 @@
+<%- include('../header') %>
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Edit Exsubcategory</h4>
+                            <p class="card-description">
+                                Edit Exsubcategory form elements
+                            </p>
+                            <form class="forms-sample" method="post" action="/updateExcategory">
+                                <input type="hidden" value="<%= single.id %>" name="editid">
+                                <div class="form-group">
+                                    <select name="category" class="form-control">
+                                        <option>---Select Category---</option>
+                                        <% category.map((cat)=>{ %>
+                                            <option <% if(cat.category==single.categoryId.category){%> selected
+                                                <%}%> value="<%= cat.id %>">
+                                                        <%= cat.category %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="subcategory" class="form-control">
+                                        <option>---Select subategory---</option>
+                                        <% subcategory.map((sub)=>{ %>
+                                            <option <% if(sub.subcategory==single.subcategoryId.subcategory) {%>
+                                                selected
+                                                <% } %> value="<%= sub.id %>">
+                                                        <%= sub.subcategory %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" value="<%= single.excategory %>" name="excategory"
+                                        class="form-control" placeholder="Enter Exsubcategory">
+                                </div>
+                                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                <button class="btn btn-light">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
+                            bootstrapdash.com 2020</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
+                                href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a>
+                            from Bootstrapdash.com</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- partial -->
+    </div>

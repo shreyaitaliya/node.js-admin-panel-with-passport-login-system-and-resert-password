@@ -1,10 +1,13 @@
 const categorymodel = require('../models/categorymodel');
+const subcategorymodel = require('../models/subcatemodel');
+const excategoryModel = require('../models/excategorymodel');
+const productModel = require('../models/productModel');
 
 const tablecategery = async (req, res) => {
     try {
-        let user = await categorymodel.find({});
+        let category = await categorymodel.find({});
         return res.render('categorys/tablecategery', {
-            record: user,
+            record: category,
         })
     } catch (error) {
         console.log(error);
@@ -36,7 +39,9 @@ const deleterecord = async (req, res) => {
             return res.redirect('back');
         }
         let deleid = await categorymodel.findByIdAndDelete(req.query.delid);
-        let alldelRecord = await categorymodel.deleteMany({ categoryId: req.query.delid });
+        let alldelRecord = await subcategorymodel.deleteMany({ categoryId: req.query.delid });
+        let exdeletrecord = await excategoryModel.deleteMany({ categoryId: req.query.delid });
+        let productrecord = await productModel.deleteMany({ categoryId: req.query.delid });
         console.log(alldelRecord);
         return res.redirect('back');
     } catch (error) {
@@ -69,6 +74,33 @@ const updatecategory = async (req, res) => {
     }
 }
 
+const categoryInstock = async (req, res) => {
+    try {
+        let catstatus = await categorymodel.findByIdAndUpdate(req.query.id, {
+            status: 0
+        })
+        req.flash('success', "category status updated!")
+        return res.redirect('back');
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const categoryOutstock = async (req, res) => {
+    try {
+        let catstatus = await categorymodel.findByIdAndUpdate(req.query.id, {
+            status: 1
+        })
+        req.flash('success', "category status updated!")
+        return res.redirect('back');
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+
 module.exports = ({
-    tablecategery, formcategory, Addcategory, deleterecord, editRecord, updatecategory
+    tablecategery, formcategory, Addcategory, deleterecord, editRecord, updatecategory, categoryInstock, categoryOutstock
 })

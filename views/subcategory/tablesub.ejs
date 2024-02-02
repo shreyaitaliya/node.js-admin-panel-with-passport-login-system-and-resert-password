@@ -35,25 +35,31 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% record.map((value,i)=>{i=i+1 %>
+                                        <% subcategory.map((subcate,i)=>{i=i+1 %>
                                             <tr>
                                                 <th>
                                                     <%= i %>
                                                 </th>
                                                 <th>
-                                                    <%= value.categoryId.category %>
+                                                    <%= subcate.categoryId.category %>
                                                 </th>
                                                 <th>
-                                                    <%= value.subcategory %>
+                                                    <%= subcate.subcategory %>
                                                 </th>
                                                 <th>
-
+                                                    <% if(subcate.categoryId.status===1) { %>
+                                                        <a href="/categoryInstock?id=<%= subcate.categoryId.id %>"
+                                                            class="btn btn-success btn-sm">Instock</a>
+                                                        <% } else { %>
+                                                            <a href="/categoryOutstock?id=<%= subcate.categoryId.id %>"
+                                                                class="btn btn-warning btn-sm">Outstock</a>
+                                                            <% } %>
                                                 </th>
                                                 <th>
-                                                    <a href="/deleterecord?delid=<%= value.id %>"
+                                                    <a href="/deletesubrecord?delid=<%= subcate.id %>"
                                                         class="btn btn-danger"><i
                                                             class="fa-solid fa-trash fs-6"></i></a> ||
-                                                    <a href="/editRecord?editId=<%= value.id %>"
+                                                    <a href="/editsubRecord?editId=<%= subcate.id %>"
                                                         class="btn btn-primary"><i
                                                             class="fa-solid fa-edit fs-6"></i></a>
                                                 </th>

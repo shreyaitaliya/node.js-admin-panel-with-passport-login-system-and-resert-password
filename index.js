@@ -1,16 +1,18 @@
 const express = require('express');
 
-const port = 8000;
+const port = 9000;
 
 const app = express();
 
 const db = require('./config/db');
+const flash = require('connect-flash');
 
 app.set('view engine', 'ejs');
 
 const path = require('path');
 
 app.use(express.static(path.join(__dirname, '/public')));
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 const cookieparser = require('cookie-parser');
 
@@ -26,6 +28,14 @@ app.use(session({
         maxAge: 1600 * 60 * 60 * 24
     }
 }))
+
+app.use(flash());
+
+//connect flash
+app.use(function (req, res, next) {
+    res.locals.message = req.flash();
+    next();
+});
 
 app.use(cookieparser());
 

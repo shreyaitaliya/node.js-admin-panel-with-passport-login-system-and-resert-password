@@ -9,6 +9,10 @@ const SubcategorySchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    status: {
+        type: Number,
+        default: 1
+    }
 })
 
 const tblName = mongoose.model('subcategory', SubcategorySchema);

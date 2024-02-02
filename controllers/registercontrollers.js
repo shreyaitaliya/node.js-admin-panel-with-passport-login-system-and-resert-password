@@ -20,6 +20,7 @@ const registerUser = async (req, res) => {
             email: req.body.email,
             password: req.body.password,
         })
+        req.flash('success', 'User register')
         return res.redirect('/');
     } catch (error) {
         console.log(error);
